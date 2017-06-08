@@ -1,0 +1,62 @@
+#wrapper #border td{
+   
+}
+#wrapper {
+    width: 100%;   
+    margin: auto;
+}
+#wrapper2 {
+    width: 792px;
+   
+    margin: auto;
+}
+.noborder th {
+	border: 1px solid #000;
+}
+body,td,th {
+	font-family: "Lucida Console", Monaco, monospace;
+        font-size: 14px;
+        
+}
+td {
+	height: 25px;
+	
+}
+.hide {
+    display: none;
+}
+.judul {
+    padding: 3px;
+    text-align: center;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    
+    
+}
+.white {
+    color: #fff;
+}
+.kanan {
+	
+	float: right;
+}
+.kiri {
+        float: left;
+}
+img {
+	margin-left: 5px;
+}
+
+.sepuluh {
+	font-size: 8px;
+}
+.besar {
+    height: 35px;
+}
+.norangka {
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+    border: 1px #000 solid;
+}

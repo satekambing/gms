@@ -1,0 +1,25 @@
+/* 
+    Document   : unit
+    Created on : 14-Feb-2013, 01:15:33
+    Author     : Jabbarbie
+    Description:
+        Purpose of the stylesheet follows.
+*/
+table {
+   
+    font-size: 14px;
+    font-family: Verdana;
+}
+table td{
+    background: #efefef;
+    border: 1px solid #dfeffc;
+    height: 40px;
+}
+table th {
+    background: #1479df;
+    color: #efefef;
+}
+fieldset {
+    background: #c5dbec;
+}
+

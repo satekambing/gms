@@ -1,0 +1,42 @@
+@charset "utf-8";
+body {
+    background: #aaa url("../img/background.png");
+}
+#wrapper {
+	text-decoration: line-through;
+	background-color: #FFF;
+	border: 2px solid #666;
+    position: relative;
+	width: 1150px;
+	margin: auto;
+        z-index: 0;
+        box-shadow: 2px 2px #666;
+
+}
+#header {
+    background: url("../img/bg.jpg") no-repeat;
+	background-color: #03499e;
+	height: 150px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666;
+}
+#konten {
+        background: #3297fd;
+	float: right;
+	width: 83%;
+	min-height: 400px;
+	padding: 5px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #666;
+}
+#footer {
+	height: 40px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #666;
+}
+.clear {
+	clear: both;
+}

@@ -1,0 +1,27 @@
+/* 
+    Document   : blueprint
+    Created on : 14-Feb-2013, 01:08:15
+    Author     : Jabbarbie
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body {
+    font-family: Verdana;
+}
+a {
+    color: #4297d7;
+    text-decoration: none;
+    
+}
+a:hover {
+    color: #222;
+    text-decoration: underline;
+    
+}
+.hide {
+    display: none;
+}
+.warning {
+    color: #cd0a0a;
+    font-style: italic;
+}
