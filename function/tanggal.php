@@ -5,60 +5,23 @@ $bulan  =  getBulan(substr($tgl,5,2));
 $tahun  =  substr($tgl,0,4);
 return  $tanggal.' '.$bulan.' '.$tahun;
 }
- 
-function  getBulan($bln){
-switch  ($bln){
-case  1:
-return  "Jan";
-break;
-case  2:
-return  "Feb";
-break;
-case  3:
-return  "Mar";
-break;
-case  4:
-return  "Mart";
-break;
-case  5:
-return  "Mei";
-break;
-case  6:
-return  "Jun";
-break;
-case  7:
-return  "Jul";
-break;
-case  8:
-return  "Agust";
-break;
 
-case  9:
-
-return  "Sept";
-
-break;
-
-case  10:
-
-return  "Okt";
-
-break;
-
-case  11:
-
-return  "Nov";
-
-break;
-
-case  12:
-
-return  "Des";
-
-break;
-
+function angkaKeBulan(int $angka){
+  if($angka > 12){ return 'Tanggal Tidak Valid';}
+  $bulan = array(1=>'Jan','Feb','Maret','April','Mei','Juni','Juli','Agust','Sept','Okt','Nov','Des');
+  return $bulan[$angka];
 }
+function UbahTanggalKeBulan($tanggal){
+  // return $tanggal;
+  if ($tanggal == "" OR $tanggal == "0000-00-00"){
+    return "";
+  }
+  $tanggal = explode("-",$tanggal);
+  $tanggal = str_replace(" ","",$tanggal);
+  $bulan   = angkaKeBulan($tanggal[1]);
+  $tanggal = $tanggal[2].' '.$bulan.' '.$tanggal[0];
 
+  return $tanggal;
 }
 
 ?>

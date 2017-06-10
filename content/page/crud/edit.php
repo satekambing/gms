@@ -1,7 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Data</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/unit.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/blueprint.css" />
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+<div class="container">
+
 <?php
-error_reporting(E_ERROR);
-include ('../../../config/koneksi.php');
-    
+if(isset($_GET['page']) && $_GET['page'] == "unit_edit"){
+  require_once ('config/koneksi.php');
+  require_once ('function/asuransi.php');
+}else{
+  require_once ('../../../config/koneksi.php');
+  require_once ('../../../function/asuransi.php');
+}
+
 // Post data PO
 if (isset($_GET['tombol'])){
 
@@ -10,10 +27,10 @@ if (isset($_GET['tombol'])){
         $es_kode = $_GET['kode'];
         $asuransi = $_GET['asuransi'];
         $ket = $_GET['ket'];
-        
+
         $masuk = $_GET['tgl_masuk'];
         $keluar = $_GET['tgl_keluar'];
-        $query   = mysql_query("UPDATE estimasi SET es_tgl_masuk = '$masuk', es_tgl_keluar = '$keluar', asuransi = '$asuransi', ket = '$ket' WHERE es_kode = $es_kode ")or die (mysql_error());
+        $query   = mysqli_query($koneksi, "UPDATE estimasi SET es_tgl_masuk = '$masuk', es_tgl_keluar = '$keluar', asuransi = '$asuransi', ket = '$ket' WHERE es_kode = $es_kode ")or die (mysqli_error());
             if ($query){
                 echo "Success";
             }
@@ -24,10 +41,10 @@ if (isset($_GET['tombol'])){
             window.opener.location.reload();
             </script>";
     }
-    else 
-    // Post data Unit 
+    else
+    // Post data Unit
         if (isset($_GET['tertanggung'])){
-            
+
             $cus = strtoupper($_GET['tertanggung']);
             $nopol = strtoupper($_GET['nopol']);
             $model = strtoupper($_GET['model']);
@@ -42,22 +59,22 @@ if (isset($_GET['tombol'])){
             $query .= "u_norangka = '$rangka',u_merk = '$merk', u_nomesin = '$mesin', ";
             $query .= "u_tahun = '$tahun', u_nomodel = '$nomodel' ";
             $query .= " WHERE u_kode = '$kode' ";
-            $result1 = mysql_query($query) or die (mysql_error());
-            //$estimasi = mysql_query("UPDATE estimasi SET es_tgl_keluar = '$keluar', es_tgl_masuk = '$masuk' WHERE u_kode = '$kode' ");
+            $result1 = mysqli_query($koneksi, $query);
+            //$estimasi = mysqli_query("UPDATE estimasi SET es_tgl_keluar = '$keluar', es_tgl_masuk = '$masuk' WHERE u_kode = '$kode' ");
             if ($result1){
                 header("Location: ../../../index.php?page=list&kode=$kode");
             }
         }
-        else 
+        else
             // Update Post Jasaadmin
             if ($_GET['page'] == "jasaadmin" AND $_GET['tombol'] == "simpan"){
                 $jakode = strtoupper($_GET['jakode']);
                 $janama = strtoupper($_GET['janama']);
                 $jaharga = trim($_GET['jaharga']);
                 $jajenis = $_GET['jajenis'];
-                $query9 = mysql_query("UPDATE  jasa SET  ja_nama =  '$janama',
+                $query9 = mysqli_query("UPDATE  jasa SET  ja_nama =  '$janama',
                 ja_jenis =  '$jajenis',
-                ja_price =  '$jaharga' WHERE  ja_kode =  '$jakode' ") or die (mysql_error());
+                ja_price =  '$jaharga' WHERE  ja_kode =  '$jakode' ") or die (mysqli_error());
                 if ($query9){
                     echo ' Has Ben Updated';
                 }
@@ -66,20 +83,20 @@ if (isset($_GET['tombol'])){
                     self.close();
                     window.opener.location.reload();
                     </script>";
-                
+
             }
-            else 
+            else
                 // Part Admin Post
                 if (isset ($_GET['partharga']) AND !isset ($_GET['partestimasi'])){
-                   
+
                     $pkode = $_GET['partkode'];
                     $pcode = strtoupper(str_replace('#', '',  str_replace(';', '', str_replace('&', '', $_GET['partcode']))));
                     $pnama = strtoupper($_GET['partnama']);
                     $pharga = $_GET['partharga'];
                     $punit = strtoupper($_GET['partunit']);
-                    $query10 = mysql_query("UPDATE  part SET  part_code = '$pcode',part_nama =  '$pnama',
+                    $query10 = mysqli_query("UPDATE  part SET  part_code = '$pcode',part_nama =  '$pnama',
                     part_unit =  '$punit',
-                    part_harga =  '$pharga' WHERE  part_kode =  '$pkode' ") or die (mysql_error());
+                    part_harga =  '$pharga' WHERE  part_kode =  '$pkode' ") or die (mysqli_error());
                     if ($query10){
                         echo ' Has Ben Updated';
                     }
@@ -92,120 +109,151 @@ if (isset($_GET['tombol'])){
                      window.opener.location.reload();
                      </script>";
                 }
-                else 
-                    // Part Estimasi 
+                else
+                    // Part Estimasi
                     if ($_GET['page'] == "partestimasi"){
                         $pkode = $_GET['partkode'];
                         $pcode = strtoupper(str_replace('#', '',  str_replace(';', '', str_replace('&', '', $_GET['partcode']))));
                         $pnama = strtoupper($_GET['partnama']);
                         $pharga = $_GET['partharga'];
                         $punit = strtoupper($_GET['partunit']);
-                        $query10 = mysql_query("UPDATE  part SET  part_code = '$pcode',part_nama =  '$pnama',
+                        $query10 = mysqli_query("UPDATE  part SET  part_code = '$pcode',part_nama =  '$pnama',
                         part_unit =  '$punit',
-                        part_harga =  '$pharga' WHERE  part_kode =  '$pkode' ") or die (mysql_error());
+                        part_harga =  '$pharga' WHERE  part_kode =  '$pkode' ") or die (mysqli_error());
                         //echo "
-                         
+
                     }
 }
 //Halaman Edit List Estimasi
-if (isset($_GET['page'])){ 
+if (isset($_GET['page'])){
    //include ('../../../config/koneksi.php');
    if ($_GET['page'] == "listestimasi"){
     $kode = $_GET['kode'];
-    $query = mysql_query("SELECT * FROM estimasi,asuransi WHERE es_kode = $kode ") or die(mysql_error());
-    $data = mysql_fetch_array($query);
+    $query = mysqli_query($koneksi, "SELECT * FROM estimasi WHERE es_kode = $kode ") or die(mysqli_error());
+    $data = mysqli_fetch_object($query);
     ?>
-    <form method="get" action="">
-    <fieldset>
-        <legend>Edit Estimasi</legend>
-    <select name="asuransi"><?php include'../../../function/asuransi.php' ?></select><br />
-    <input type="date" name="tgl_masuk" value="<?php echo $data['es_tgl_masuk']?>"/><br />
-    <input type="date" name="tgl_keluar" value="<?php echo $data['es_tgl_keluar']?>"/><br />
-    <textarea cols="15" rows="2" name="ket"><?php echo $data['ket']?></textarea><br />
-    <input type="hidden" name="page" value="listestimasipost" />
-    <input type="hidden" name="kode" value="<?php echo $_GET['kode'] ?>" />
-    <input type="submit" name="tombol" value="simpan">
-    </fieldset>
+    <form method="get"  class="form">
+      <h2> Edit Estimasi</h2>
+    <!-- <select name="asuransi"> -->
+      <?php //include'../../../function/xasuransi.php' ?>
+    <!-- </select> -->
+    <div class="form-group">
+      <label for="">Tanggal Masuk</label>
+      <input type="date" name="tgl_masuk" class='form-control' required="" value="<?php echo $data->es_tgl_masuk ?>"/>
+    </div>
+    <div class="form-group">
+      <label for="">Tanggal Keluar</label>
+      <input type="date" name="tgl_keluar" class='form-control' value="<?php echo $data->es_tgl_keluar ?>"/>
+    </div>
+    <div class="form-group">
+      <label for="">Keterangan</label>
+      <textarea cols="15" rows="2" name="ket" class="form-control"><?php echo $data->ket ?></textarea>
+    </div>
+    <div class="form-group">
+      <label for="">Asuransi</label>
+      <select class="form-control" name="asuransi">
+        <?php Asuransi($data->asuransi??''); ?>
+      </select>
+    </div>
+    <input type="hidden" name="page" class='form-control' value="listestimasipost" />
+    <input type="hidden" name="kode" class='form-control' value="<?php echo $_GET['kode'] ?>" />
+    <div class="form-group">
+      <input type="submit" name="tombol" class='btn btn-primary' value="SIMPAN">
+    </div>
     </form>
        <?php
    }
 
 //Halaman Edit Unit
     if ($_GET['page'] == "unit_edit"){
-       
         $kode = $_GET['kode'];
-        $query = mysql_query("SELECT * FROM unit, estimasi WHERE unit.u_kode = '".$kode."' AND estimasi.u_kode = '".$kode."' ") or die (mysql_error());
-        $row = mysql_fetch_array($query);
+        $query = mysqli_query($koneksi, "SELECT * FROM unit, estimasi WHERE unit.u_kode = '".$kode."' AND estimasi.u_kode = '".$kode."' ") or die (mysqli_error());
+        $row = mysqli_fetch_array($query);
     ?>
-        <form method="get" action="content/page/crud/edit.php">
-        <fieldset>
-           <legend>Edit Unit</legend>
-                <table width="100%">
-                <tr>
-                    <td>Nama </td><td><input type="text" name="tertanggung" value="<?php echo $row['u_nama']?>" autofocus/></td>
-                    <td>Nopol</td><td><input type="text" name="nopol" value="<?php echo $row['u_nopol']?>" /></td>
-                </tr>
-                <tr>
-                    <td>Jenis</td><td><input type="text" name="merk" value="<?php echo $row['u_merk']?>" size="5"/>-<input type="text" name="model" value="<?php echo $row['u_model']?>" size="8"/></td>
-                    <td>Tahun</td><td><input type="text" name="tahun" value="<?php echo $row['u_tahun']?>" /></td>
-                </tr>
-                <tr>
-                    <td>No. Rangka</td><td><input type="text" name="rangka" value="<?php echo $row['u_norangka']?>" /></td>
-                    <td>No. Mesin</td><td><input type="text" name="mesin" value="<?php echo $row['u_nomesin']?>" /></td>
-                </tr>
-                <tr>
-                    <td>No. Model</td><td><input type="text" name="nomodel" value="<?php echo $row['u_nomodel']?>" /></td>
-                    <td colspan="2"><input type="submit" name="tombol" value="SIMPAN"></td>
-                </tr>
-                <input type="hidden" name="page" value="unit" />
-                <input type="hidden" name="kode" value="<?php echo $_GET['kode']?>" />
-                </table>
-        </fieldset>
-    </form>
+        <h2>Edit Unit</h2>
+        <div class="row col-sm-9">
+        <form method="get" action="content/page/crud/edit.php" class="form">
+          <div class="form-group">
+            <label for="">Nama </label>
+            <input type="text" name="tertanggung" class='form-control' value="<?php echo $row['u_nama']?>" autofocus />
+          </div>
+          <div class="form-group">
+            <label for="">Nopol</label>
+            <input type="text" name="nopol" class='form-control' value="<?php echo $row['u_nopol']?>" />
+          </div>
+          <div class="form-group">
+            <label for="">Jenis Kendaraan</label>
+            <input type="text" name="merk" class='form-control' value="<?php echo $row['u_merk']?>" size="5"/>-
+            <input type="text" name="model" class='form-control' value="<?php echo $row['u_model']?>" size="8"/>
+          </div>
+          <div class="form-group">
+            <label for="">Tahun</label>
+            <input type="text" name="tahun" class='form-control' value="<?php echo $row['u_tahun']?>" />
+          </div>
+          <div class="form-group">
+            <label for="">No. Rangka</label>
+            <input type="text" name="rangka" class='form-control' value="<?php echo $row['u_norangka']?>" />
+          </div>
+          <div class="form-group">
+            <label for="">No. Mesin</label>
+            <input type="text" name="mesin" class='form-control' value="<?php echo $row['u_nomesin']?>" />
+          </div>
+          <div class="form-group">
+            <label for="">No. Model</label>
+            <input type="text" name="nomodel" class='form-control' value="<?php echo $row['u_nomodel']?>" />
+          </div>
+          <div class="form-group">
+            <input type="submit" name="tombol" class='btn btn-primary' value="SIMPAN">
+          </div>
+
+
+                <input type="hidden" name="page" class='form-control' value="unit" />
+                <input type="hidden" name="kode" class='form-control' value="<?php echo $_GET['kode']?>" />
+      </form>
+      </div>
     <?php }
-    else 
+    else
         // Edit Jasaadmin
         if ($_GET['page'] == "jasaadmin"){
-            
-            // Set Variable 
+
+            // Set Variable
             $jakode = $_GET['kode'];
-            $queryjasa = mysql_query("SELECT * FROM jasa WHERE ja_kode = '$jakode' ");
-            $j = mysql_num_rows($queryjasa);
-            while ($data = mysql_fetch_array($queryjasa)){
+            $queryjasa = mysqli_query($koneksi, "SELECT * FROM jasa WHERE ja_kode = '$jakode' ");
+            $j = mysqli_num_rows($queryjasa);
+            while ($data = mysqli_fetch_array($queryjasa)){
             ?>
             <form action="" >
-            <fieldset>
                 <legend>Edit Jasa - Admin</legend>
                 <table width="100%">
-                    <td>Kode </td><td><input type="text" name="jakode" value="<?php echo $data['ja_kode'] ?>"/></td>
-                    <td>Nama </td><td><input type="text" name="janama"  value="<?php echo $data['ja_nama'] ?> "/></tr>
-                    <tr><td>Harga </td><td><input type="text" name="jaharga" value="<?php echo $data['ja_price'] ?>"/></td>
+                    Kode <input type="text" name="jakode" class='form-control' value="<?php echo $data['ja_kode'] ?>"/>
+                    Nama <input type="text" name="janama"  class='form-control' value="<?php echo $data['ja_nama'] ?> "/>
+                    Harga <input type="text" name="jaharga" class='form-control' value="<?php echo $data['ja_price'] ?>"/>
 
-                    <td>Jenis</td><td><select name="jajenis">
+                    Jenis<select name="jajenis">
                                 <?php
                                 foreach ($jenis as $value){
                                      if ($value == $data['ja_jenis']){
-                                        echo "<option selected=selected value=$value>$value</option>"; 
+                                        echo "<option selected=selected class='form-control' value=$value>$value</option>";
                                      }
                                      else {
-                                        echo "<option value=$value>$value</option>"; 
+                                        echo "<option class='form-control' value=$value>$value</option>";
                                      }
                                 } ?>
-                            </select></td></tr>   
-                    <input type="hidden" name="page" value="jasaadmin" />
-                    <tr><td colspan="4"><input type="submit" name="tombol" value="simpan"></td></tr>
+                            </select>
+                    <input type="hidden" name="page" class='form-control' value="jasaadmin" />
+                    <td colspan="4"><input type="submit" name="tombol" class='form-control' value="simpan">
                 </table>
             </fieldset>
             </form>
             <?php
             } //  End of while statment
         }
-        else 
+        else
             // Start Part Admin
             if ($_GET['page'] == 'partadmin'){
                 $part_kode = $_GET['kode'];
-                $query = mysql_query("SELECT * FROM part WHERE part_kode = '$part_kode' ");
-                $ambil = mysql_fetch_array($query);
+                $query = mysqli_query($koneksi, "SELECT * FROM part WHERE part_kode = '$part_kode' ");
+                $ambil = mysqli_fetch_array($query);
                 $nama = $ambil['part_nama'];
                 $code = $ambil['part_code'];
                 $harga = $ambil['part_harga'];
@@ -215,21 +263,21 @@ if (isset($_GET['page'])){
                     <fieldset>
                         <legend>Edit Part Admin</legend>
                         <table width="100%">
-                            <tr><td>Code</td><td><input type="text" name="partcode" value="<?php echo $code ?>"/><input type="hidden" name="page" value="partadmin"><input type="hidden" name="partkode" value="<?php echo $part_kode?>" /></td><td>Nama</td><td><input type="text" name="partnama" value="<?php echo $nama ?>"/></td></tr>
-                            <tr><td>Unit</td><td><input type=text" name="partunit" value="<?php echo $unit?>" size="10"/></td><td>Harga</td><td><input type=text name=partharga value="<?php echo $harga ?>" /></td></tr>
-                            <tr><td>&nbsp</td><td colspan="3"><input type="submit" name="tombol" value="simpan" /></td></tr>
+                            Code<input type="text" name="partcode" class='form-control' value="<?php echo $code ?>"/><input type="hidden" name="page" class='form-control' value="partadmin"><input type="hidden" name="partkode" class='form-control' value="<?php echo $part_kode?>" />Nama<input type="text" name="partnama" class='form-control' value="<?php echo $nama ?>"/>
+                            Unit<input type=text" name="partunit" class='form-control' value="<?php echo $unit?>" size="10"/>Harga<input type=text name=partharga class='form-control' value="<?php echo $harga ?>" />
+                            &nbsp<td colspan="3"><input type="submit" name="tombol" class='form-control' value="simpan" />
                         </table>
                     </fieldset>
 
                 </form>
                 <?php
             }
-            else 
-                // Part Estimasi 
+            else
+                // Part Estimasi
                 if ($_GET['page'] == 'partestimasi'){
                     $part_kode = $_GET['kode'];
-                    $query = mysql_query("SELECT * FROM part WHERE part_kode = '$part_kode' ");
-                    $ambil = mysql_fetch_array($query);
+                    $query = mysqli_query($koneksi, "SELECT * FROM part WHERE part_kode = '$part_kode' ");
+                    $ambil = mysqli_fetch_array($query);
                     $nama = $ambil['part_nama'];
                     $code = $ambil['part_code'];
                     $harga = $ambil['part_harga'];
@@ -239,9 +287,9 @@ if (isset($_GET['page'])){
                         <fieldset>
                             <legend>Edit Part Estimasi</legend>
                             <table width="100%">
-                                <tr><td>Code</td><td><input type="text" name="partcode" value="<?php echo $code ?>"/><input type="hidden" name="page" value="partestimasi"><input type="hidden" name="partkode" value="<?php echo $part_kode?>" /></td><td>Nama</td><td><input type="text" name="partnama" value="<?php echo $nama ?>"/></td></tr>
-                                <tr><td>Unit</td><td><input type=text" name="partunit" value="<?php echo $unit?>" size="10"/></td><td>Harga</td><td><input type=text name=partharga value="<?php echo $harga ?>" /></td></tr>
-                                <tr><td>&nbsp</td><td colspan="3"><input type="submit" name="tombol" value="simpan" /></td></tr>
+                                Code<input type="text" name="partcode" class='form-control' value="<?php echo $code ?>"/><input type="hidden" name="page" class='form-control' value="partestimasi"><input type="hidden" name="partkode" class='form-control' value="<?php echo $part_kode?>" />Nama<input type="text" name="partnama" class='form-control' value="<?php echo $nama ?>"/>
+                                Unit<input type=text" name="partunit" class='form-control' value="<?php echo $unit?>" size="10"/>Harga<input type=text name=partharga class='form-control' value="<?php echo $harga ?>" />
+                                &nbsp<td colspan="3"><input type="submit" name="tombol" class='form-control' value="simpan" />
                             </table>
                         </fieldset>
 
@@ -249,8 +297,10 @@ if (isset($_GET['page'])){
                     <?php
                 }
         // End of JasaAdmin
-    
+
 }
 ?>
 
-
+</div>
+</body>
+</html>

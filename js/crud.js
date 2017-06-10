@@ -12,3 +12,6 @@ function tutup(){
 function directlink(url){
     tutup();
 }
+function refreshparent(){
+  window.opener.location.reload(false);
+}

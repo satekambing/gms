@@ -1,25 +1,18 @@
-/* 
+/*
     Document   : unit
     Created on : 14-Feb-2013, 01:15:33
+    Update     : 19-Jun-2017, 04:19:10
     Author     : Jabbarbie
     Description:
         Purpose of the stylesheet follows.
 */
-table {
-   
-    font-size: 14px;
-    font-family: Verdana;
+.tangan_list img{
+  position: absolute;
+  bottom: -100%;
+  left: -1%;
+  width: 80px;
 }
-table td{
-    background: #efefef;
-    border: 1px solid #dfeffc;
-    height: 40px;
+.tangan_div {
+  width: 100%;
+  position: relative;
 }
-table th {
-    background: #1479df;
-    color: #efefef;
-}
-fieldset {
-    background: #c5dbec;
-}
-
