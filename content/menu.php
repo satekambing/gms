@@ -5,8 +5,6 @@
     <!-- <a href="index.php?page=asuransi"><li>Asuransi</li></a> -->
     <!-- <a href="index.php?page=partadmin"><li>Spare Part</li></a> -->
     <!-- <a href="index.php?page=jasaadmin"><li>Jasa</li></a> -->
-
-
 <!--Menu JasaAdmin -->
 <?php if (isset($_GET['page']) and $_GET['page'] == "jasaadmin"){?>
 
@@ -22,13 +20,20 @@
     <a href="" ><li>Input </li></a>
 
 <?php } ?>
+<?php if (isset($_GET['page']) and $_GET['page'] == "foto"){?>
+  <li><a href="" onclick="inputdata('content/page/crud/input.php?page=foto','500','620')" > Tambah Foto</a></li>
+<?php } ?>
 
 <!-- Menu Unit -->
 <?php if (isset($_GET['page']) and $_GET['page'] == "unit"){ ?>
     <li><a href="" onclick="inputdata('content/page/crud/input.php?page=unit','600','620')" > Tambah Unit</a></li>
+
     <?php if (isset($_GET['search']) AND $_GET['bulan'] != '0'){?>
-    <a href="content/page/report/report_os.php?page=os&bulan=<?php echo $_GET['bulan']?>&asuransi=<?php echo $_GET['asuransi']?>" target="_Blank"> <li>Out Standing</li></a>
+    <li>
+      <a href="content/page/report/report_os.php?page=os&bulan=<?php echo $_GET['bulan']?>&asuransi=<?php echo $_GET['asuransi']?>" target="_Blank"> Out Standing</a>
+    </li>
     <?php } ?>
+      <li><a href="index.php?page=foto">Foto</a></li>
 
 <?php } ?>
 
@@ -41,15 +46,11 @@
 
 <!-- Menu Estimasi-->
 <?php if (isset($_GET['page']) and $_GET['page'] == "estimasi"){ ?>
-
     <li><a href="" onclick="inputdata('content/page/crud/input.php?page=part&es_kode=<?php echo $_GET['es_kode']?>','570','700')" > Tambah Part</li></a>
     <li><a href="" onclick="inputdata('content/page/crud/input.php?page=jasa&es_kode=<?php echo $_GET['es_kode']?>','500','750')" class="text-info"> Tambah Jasa</li></a>
 
     <li><a href="content/page/report/report_estimasi.php?page=estimasi&es_kode=<?php echo $_GET['es_kode']?>&u_kode=<?php echo $_GET['u_kode']?>" target="_Blank">Print Estimasi</a></li>
     <li><a href="content/page/report/report_kwitansi.php?page=estimasi&es_kode=<?php echo $_GET['es_kode']?>&u_kode=<?php echo $_GET['u_kode']?>" target="_Blank">Cetak Nota</a></li>
-
-
-
 <?php } ?>
 <!-- Menu List Estimasi-->
 <?php if (isset($_GET['page']) and $_GET['page'] == "asuransi"){ ?>

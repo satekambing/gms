@@ -1,13 +1,13 @@
-<?php 
+<?php
 if (!isset($_GET['page'])){
     header("Location: ?page=unit");
 }
 else {
 	$page = $_GET['page'];
 	switch ($page) {
-	
+
 	case 'unit': include ('page/unit.php');
-                     $title = "Unit Kendaraan"; 
+                     $title = "Unit Kendaraan";
 				break;
 	case 'ck':  include ('page/ck.php');
 				break;
@@ -25,13 +25,15 @@ else {
                                 break;
         case 'asuransi' : include 'page/asuransi.php';
                                 break;
+        case 'foto' : include 'page/foto.php';
+                                break;
 		case 'nota' :	  include 'page/nota.php';
 								break;
 		case 'estimasifaktur' :	  include 'page/estimasifaktur.php';
 								break;
 	default : include ('page/404.php');
 				break;
-	
+
 	}
 }
 ?>

@@ -19,11 +19,22 @@ require_once ('../../../function/asuransi.php');
 <link rel="stylesheet" type="text/css" href="../../../css/unit.css" />
 <link rel="stylesheet" type="text/css" href="../../../css/blueprint.css" />
 <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../../../css/uploadfile.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body <?php echo $onpage ?>>
 <div class="container">
 <!-- Input Estimasi-->
+<?php if (isset($_GET['page']) and $_GET['page'] == "foto") {?>
+<h2>Tambah Foto - Kendaraan</h2>
+<form class="form" action="" method="post">
+  <input type="text" id="nopol" name="nopol" value="<?php echo $_GET['nopol']??'' ?>" placeholder="Masukkan Nopol Kendaraan" required="">
+    <button type="button" name="button" class="btn btn-danger" id="buttonMerah">Klik Disini</button>
+   <br /><br />
+  <div id="fileuploader">Upload</div>
+  <button type="button" class="btn btn-primary" id="extrabutton" >Upload Foto Sekarang</button>
+</form>
+<?php } ?>
 <?php if (isset($_GET['page']) and $_GET['page'] == "list") {?>
 <h2>Tambah Estimasi</h2>
 <form method="get" class="form">
@@ -634,6 +645,54 @@ if (isset($_GET['tombol']) AND isset($_GET['page'])){
 
 ?>
 </div>
+<script src="../../../js/jquery-3.2.1.min.js"></script>
+<script src="../../../js/jquery.uploadfile.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#extrabutton, #fileuploader").hide(1);
+  // ini fungsi
+  function datax(nopolf){
+      extraObj = $("#fileuploader").uploadFile({
+          url:"../../../function/upload.php",
+          multiple:true,
+          dragDrop:true,
+          fileName:"myfile",
+          acceptFiles:"image/*",
+          showPreview:true,
+          previewHeight: "100px",
+          previewWidth: "100px",
+          autoSubmit:false,
+          formData: {"nopol":nopolf},
+          extraHTML:function(){
+            	var html = "<div><b>Nama Foto</b> <br /><input type='text' name='tags' value='' class='' placeholder='Misal : Foto Tampak Depan' /> ";
+              // html += "<input type=text name=nopol value='' class='nopol' >";
+              html += "</div>";
+          		return html;
+          }
+        });
+    };
+//
+$("#buttonMerah").click(function(){
+  nopol = $("#nopol").val();
+  if(nopol == ""){
+     alert("Nopol Belum Di isi !!!");
+  }else{
+    datax(nopol);
+    $("#extrabutton, #fileuploader").show(1000);
+  }
+});
 
+    $("#extrabutton").click(function(){
+      // extraObj.startUpload();
+      nopol = $("#nopol").val();
+      if(nopol == ""){
+         alert("Nopol Belum Di isi !!!");
+      }else{
+    	   extraObj.startUpload();
+      }
+    });
+
+});
+</script>
 </body>
 </html>
