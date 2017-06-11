@@ -28,12 +28,12 @@ if(isset($_FILES["myfile"]))
 			$unik     = rand(0,999);
 			$label = $_POST['tags'];
 			// $fileName = '~'.$label.'.'.$ext;
-			$fileName = $nopol.'-ada-'.$label.'.'.$ext;
+			$fileName = $label.'.'.$ext;
 
       if(!file_exists($output_dir.$nopol)){
 				mkdir($output_dir.$nopol, 0777);
-				$fileName = $nopol.DIRECTORY_SEPARATOR.$label.'.'.$ext;
 			}
+			$fileName = $nopol.DIRECTORY_SEPARATOR.$label.'.'.$ext;
 		}
  		move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.$fileName);
     	$ret[]= $fileName;

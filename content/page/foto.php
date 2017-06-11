@@ -26,6 +26,7 @@ $ambil = mysqli_query($koneksi, "SELECT * FROM foto_kendaraan");
                $namafolder = $file;
               //  echo $namafolder.' => '.br ;
                // cari di dalam folder /files/$namafolder/
+							 if($namafolder != ".png"){
                if ($dh2 = opendir($dir.'/'.$namafolder)){
                  // ini cark di dalam folder files / folder lagi
                  while (($file2 = readdir($dh2)) !== false){
@@ -42,6 +43,8 @@ $ambil = mysqli_query($koneksi, "SELECT * FROM foto_kendaraan");
                    }
                  }
                }
+						 }
+							 //
             }
 
           }
