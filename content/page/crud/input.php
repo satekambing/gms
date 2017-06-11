@@ -663,12 +663,13 @@ $(document).ready(function() {
           previewWidth: "100px",
           autoSubmit:false,
           formData: {"nopol":nopolf},
-          extraHTML:function(){
-            	var html = "<div><b>Nama Foto</b> <br /><input type='text' name='tags' value='' class='' placeholder='Misal : Foto Tampak Depan' /> ";
-              // html += "<input type=text name=nopol value='' class='nopol' >";
-              html += "</div>";
-          		return html;
-          }
+          extraHTML:function()
+          {
+            	var html = "<div><b>File Tags:</b><input type='text' name='tags' value='' /> <br/>";
+        		html += "<b>Category</b>:<select name='category'><option value='1'>ONE</option><option value='2'>TWO</option></select>";
+        		html += "</div>";
+        		return html;
+          },
         });
     };
 //

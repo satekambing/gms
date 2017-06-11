@@ -1,7 +1,6 @@
 <?php
 $output_dir = "../files/";
 require_once ('../config/koneksi.php');
-
 if(isset($_FILES["myfile"]))
 {
 	$ret = array();
@@ -20,18 +19,23 @@ if(isset($_FILES["myfile"]))
 	//If Any browser does not support serializing of multiple files using FormData()
 	if(!is_array($_FILES["myfile"]["name"])) //single file
 	{
-		$nopol = $_POST['nopol']??'kambing';
 
  	 	$fileName = $_FILES["myfile"]["name"];
 		$pecahfile= (explode(".", $fileName));
 		$ext 			= $pecahfile[1];
-		if(isset($_POST['tags']) && !$_POST['tag'] == ""){
+		$nopol   =  $_POST['nopol'];
+		if(isset($_POST['tags']) && !$_POST['tags'] == ""){
 			$unik     = rand(0,999);
 			$label = $_POST['tags'];
+			// $fileName = '~'.$label.'.'.$ext;
+			$fileName = $nopol.'-ada-'.$label.'.'.$ext;
 
-			$fileName = $label.'.'.$ext;
+      if(!file_exists($output_dir.$nopol)){
+				mkdir($output_dir.$nopol, 0777);
+				$fileName = $nopol.DIRECTORY_SEPARATOR.$label.'.'.$ext;
+			}
 		}
- 		move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.'~'.$fileName);
+ 		move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.$fileName);
     	$ret[]= $fileName;
 
 			$sql  = "INSERT INTO foto_kendaraan (label, nama_file, nopol, folder) ";
