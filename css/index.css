@@ -55,7 +55,7 @@ body {
   float: left;
   margin: 1% 1% 1% 0;
 }
-.figure > img {
+.figure > a > img {
   width: 100%;
   min-height: 150px;
   max-height: 150px;

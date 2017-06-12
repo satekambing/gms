@@ -665,8 +665,7 @@ $(document).ready(function() {
           formData: {"nopol":nopolf},
           extraHTML:function()
           {
-            	var html = "<div><b>File Tags:</b><input type='text' name='tags' value='' /> <br/>";
-        		html += "<b>Category</b>:<select name='category'><option value='1'>ONE</option><option value='2'>TWO</option></select>";
+            	var html = "<div><b>Nama File:</b><br/><input type='text' name='tags' value='' /> ";
         		html += "</div>";
         		return html;
           },

@@ -34,7 +34,7 @@
     </li>
     <?php } ?>
       <li><a href="index.php?page=foto">Foto</a></li>
-
+      <li><a href="logout.php">Logout</a></li>
 <?php } ?>
 
 <!-- Menu List Estimasi-->

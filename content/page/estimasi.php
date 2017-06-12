@@ -14,7 +14,6 @@ if (isset($_GET['page']) AND $_GET['page'] == "estimasi"){
     $query2 = mysqli_query($koneksi, "SELECT * FROM estimasijasa WHERE es_kode = '$es_kode' ");
     $querypart = mysqli_query($koneksi, "SELECT * FROM estimasipart WHERE es_kode = '$es_kode' ");
     $s = (isset($_GET['s'])) ? filter_var($_GET['s'], FILTER_SANITIZE_STRING) : '';
-    session_start();
     echo "<table class='table table-condensed'>";
 
     //Tampilkan detail Unit

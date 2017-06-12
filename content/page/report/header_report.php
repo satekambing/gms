@@ -47,7 +47,7 @@ if ($unit['es_tgl_keluar'] == '0000-00-00'){
   <tr>
     <td>Tgl Cetak</td>
     <td>:</td>
-    <td class="kanan"><?php echo $tglnow?></td>
+    <td class="kanan"><?php echo UbahTanggalKeBulan($tanggaldb) ?></td>
   </tr>
   <tr>
     <td width="17%">&nbsp;</td>

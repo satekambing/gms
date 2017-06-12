@@ -94,9 +94,9 @@ if (isset($_GET['tombol'])){
                     $pnama = strtoupper($_GET['partnama']);
                     $pharga = $_GET['partharga'];
                     $punit = strtoupper($_GET['partunit']);
-                    $query10 = mysqli_query("UPDATE  part SET  part_code = '$pcode',part_nama =  '$pnama',
+                    $query10 = mysqli_query($koneksi, "UPDATE  part SET  part_code = '$pcode',part_nama =  '$pnama',
                     part_unit =  '$punit',
-                    part_harga =  '$pharga' WHERE  part_kode =  '$pkode' ") or die (mysqli_error());
+                    part_harga =  '$pharga' WHERE  part_kode =  '$pkode' ") ;
                     if ($query10){
                         echo ' Has Ben Updated';
                     }

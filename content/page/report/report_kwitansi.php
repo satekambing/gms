@@ -10,7 +10,9 @@ $totalestimasi = 0;
 //Query data part dan jasa berdasarkan estimasi.part_kode (didapat dr include diatas)
 $es = mysqli_query($koneksi, "SELECT part_kode FROM estimasipart WHERE es_kode = '$es_kode'");
 $es_jasa = mysqli_query($koneksi, "SELECT ja_kode FROM estimasijasa WHERE es_kode = '$es_kode' ");
-
+if(mysqli_num_rows($es) <= 0 AND mysqli_num_rows($es_jasa) <= 0){
+  echo die("<hr><H1 align=center>---- Data Kwitansi Kosong ---- </H1><hr>");
+}
 //cari jumlah part
 $jmlpart = mysqli_num_rows($es);
 

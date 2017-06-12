@@ -11,6 +11,7 @@ $totalestimasi = 0;
 $es = mysqli_query($koneksi, "SELECT part_kode FROM estimasipart WHERE es_kode = '$es_kode'");
 $es_jasa = mysqli_query($koneksi, "SELECT ja_kode FROM estimasijasa WHERE es_kode = '$es_kode' ");
 
+
 //cari jumlah part
 $jmlpart = mysqli_num_rows($es);
 

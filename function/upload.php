@@ -20,26 +20,27 @@ if(isset($_FILES["myfile"]))
 	if(!is_array($_FILES["myfile"]["name"])) //single file
 	{
 
- 	 	$fileName = $_FILES["myfile"]["name"];
+		$nopol   =  $_POST['nopol'];
+ 	 	$fileName = $nopol.DIRECTORY_SEPARATOR.$_FILES["myfile"]["name"];
 		$pecahfile= (explode(".", $fileName));
 		$ext 			= $pecahfile[1];
-		$nopol   =  $_POST['nopol'];
+		$fileNameDB = $_FILES["myfile"]["name"];
+		if(!file_exists($output_dir.$nopol)){
+			mkdir($output_dir.$nopol, 0777);
+		}
 		if(isset($_POST['tags']) && !$_POST['tags'] == ""){
 			$unik     = rand(0,999);
 			$label = $_POST['tags'];
 			// $fileName = '~'.$label.'.'.$ext;
-			$fileName = $label.'.'.$ext;
+			$fileNameDB = $label.'.'.$ext;
 
-      if(!file_exists($output_dir.$nopol)){
-				mkdir($output_dir.$nopol, 0777);
-			}
 			$fileName = $nopol.DIRECTORY_SEPARATOR.$label.'.'.$ext;
 		}
  		move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.$fileName);
     	$ret[]= $fileName;
 
 			$sql  = "INSERT INTO foto_kendaraan (label, nama_file, nopol, folder) ";
-			$sql .= "VALUES ('$label', '$fileName','$nopol','$nopol')";
+			$sql .= "VALUES ('$label', '$fileNameDB','$nopol','$nopol')";
 			mysqli_query($koneksi, $sql);
 	}
 	else  //Multiple files, file[]

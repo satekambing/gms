@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['username'])){
+  header('location: login.php');
+}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -13,6 +19,8 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
         <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css" />
+
         <link rel="stylesheet" href="font_awesome/css/font-awesome.min.css" type="text/css" >
 </head>
 <body>
@@ -41,9 +49,11 @@ require_once ('function/fungsi_view.php');
 <script src="js/bootstrap.min.js"></script>
 <script src="js/crud.js"></script>
 <script src="js/jquery.dataTables.min.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
 
 <script >
 $('#tablex').DataTable();
+$('.fancybox').fancybox();
 </script>
 </body>
 </html>
