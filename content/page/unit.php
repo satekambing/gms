@@ -8,7 +8,7 @@ $th = array('1'=>'No','14'=>'Asuransi','42'=>'Tertanggung','25'=>'Model','18'=>'
 <div class="row">
 	<form method=get class="form-inline" />
 		<select name="asuransi" class="form-control">
-			<option value="all">ALL</option><?php Asuransi($_GET['asuransi']??''); ?>
+			<option value="all">ALL</option><?php Asuransi(($_GET['asuransi'])?$_GET['asuransi']:''); ?>
 		</select>
 		<select name="bulan" class="form-control"><?php include('config/bulan.php'); ?></select>
 		<input type=text name=search class="form-control" placeholder="Kata Kunci: Nopol,Nama,Unit.. " autofocus >
