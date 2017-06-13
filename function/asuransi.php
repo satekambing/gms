@@ -37,7 +37,7 @@
 //         echo '<option value ='.$asdata['as_kode'].' />'.$asdata['as_nama'].'</option>';
 //     }
 // }
-function DropDown(array $data, $selected = null){
+function DropDown($data, $selected = null){
   $withkey = (isset($data[0])?0:1);
   // $withkey = 0;
   // if ($data[0] == null){
@@ -56,10 +56,20 @@ function DropDown(array $data, $selected = null){
   }
 }
 function Asuransi($asuransi = null){
-  DropDown(ASURANSI,$asuransi);
+  // DropDown(ASURANSI,$asuransi);
+  $data = array();
+  $koneksi  = mysqli_connect(SERVER, USER, PASS, DBNAME) ;
+  $qasuransi= mysqli_query($koneksi, "SELECT as_nama FROM asuransi");
+  while($r=mysqli_fetch_object($qasuransi)){
+    array_push($data, $r->as_nama);
+  }
+  DropDown($data,$asuransi);
 }
 function NamaAsuransi($asuransi){
   // berupa angka
-  return ASURANSI[$asuransi];
+  $koneksi  = mysqli_connect(SERVER, USER, PASS, DBNAME) ;
+  $qasuransi= mysqli_query($koneksi, "SELECT as_nama FROM asuransi WHERE as_kode = $asuransi");
+  $data     = mysqli_fetch_object($qasuransi);
+  return $data->as_nama;
 }
 ?>

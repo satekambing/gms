@@ -28,7 +28,7 @@ require_once ('../../../function/asuransi.php');
 <?php if (isset($_GET['page']) and $_GET['page'] == "foto") {?>
 <h2>Tambah Foto - Kendaraan</h2>
 <form class="form" action="" method="post">
-  <input type="text" id="nopol" name="nopol" value="<?php echo $_GET['nopol']??'' ?>" placeholder="Masukkan Nopol Kendaraan" required="">
+  <input type="text" id="nopol" name="nopol" value="<?php echo (isset($_GET['nopol']))?$_GET['nopol']:''; ?>" placeholder="Masukkan Nopol Kendaraan" required="">
     <button type="button" name="button" class="btn btn-danger" id="buttonMerah">Klik Disini</button>
    <br /><br />
   <div id="fileuploader">Upload</div>

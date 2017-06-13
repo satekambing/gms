@@ -18,7 +18,7 @@ if(!isset($_GET['folder'])){
 <br>
   <div id="foto">
     <?php
-		$folder = $_GET['folder']??'';
+		$folder = (isset($_GET['folder']))?$_GET['folder']:'';
 		$dir = "files/";
 		if($folder == ''){
 			// root

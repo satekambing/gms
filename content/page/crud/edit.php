@@ -152,7 +152,7 @@ if (isset($_GET['page'])){
     <div class="form-group">
       <label for="">Asuransi</label>
       <select class="form-control" name="asuransi">
-        <?php Asuransi($data->asuransi??''); ?>
+        <?php Asuransi($data->asuransi); ?>
       </select>
     </div>
     <input type="hidden" name="page" class='form-control' value="listestimasipost" />

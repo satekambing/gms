@@ -12,6 +12,6 @@ define('SERVER','localhost');
 define('USER','root');
 define('PASS','tidakadakok');
 define('DBNAME','gms');
-define('ASURANSI',array(1=>'JASINDO','ASWATA','PRIBADI'));
+// define('ASURANSI',array(1=>'JASINDO','ASWATA','PRIBADI'));
 $koneksi  = mysqli_connect(SERVER, USER, PASS, DBNAME) ;
 ?>
